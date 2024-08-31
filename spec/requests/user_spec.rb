@@ -20,7 +20,7 @@ RSpec.describe UsersController, type: :request do
         post '/users', params: { email: 'matheus@email.com', password: '123456', name: 'Matheus' }
         expect(response).to have_http_status(:unprocessable_entity)
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']).to eq(['Email has already been taken'])
+        expect(parsed_response['errors']).to eq(['Email Já existe um usuário com esse email'])
       end
     end
   end
