@@ -5,7 +5,7 @@ class LoginController < ApplicationController
       payload = { id: user.id, email: user.email }
       return render status: :ok, json: { id: user.id, token: JsonWebToken.encode(payload) }
     end
-    render status: :unauthorized, json: { errors: 'Invalid email or password' }
+    render status: :unauthorized, json: { errors: ['Login ou senha inválidos'] }
   end
 
   private

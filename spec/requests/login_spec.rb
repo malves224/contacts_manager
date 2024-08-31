@@ -18,7 +18,7 @@ RSpec.describe LoginController, type: :request do
         post '/login', params: { email: 'invalid@email.com', password: 'invalidpassword' }
         expect(response).to have_http_status(:unauthorized)
         parsed_response = JSON.parse(response.body)
-        expect(parsed_response['errors']).to eq('Invalid email or password')
+        expect(parsed_response['errors']).to eq(['Login ou senha inválidos'])
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe LoginController, type: :request do
           post '/login', params: { email: 'matheus@email.com', password: 'invalidpassword' }
           expect(response).to have_http_status(:unauthorized)
           parsed_response = JSON.parse(response.body)
-          expect(parsed_response['errors']).to eq('Invalid email or password')
+          expect(parsed_response['errors']).to eq(['Login ou senha inválidos'])
         end
       end
   end
