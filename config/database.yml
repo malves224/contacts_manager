@@ -20,6 +20,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  username: root
+  password: root
 
 development:
   <<: *default
@@ -82,5 +85,5 @@ test:
 production:
   <<: *default
   database: contacts_manager_production
-  username: contacts_manager
+  username: root
   password: <%= ENV["CONTACTS_MANAGER_DATABASE_PASSWORD"] %>
