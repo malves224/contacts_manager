@@ -1,6 +1,8 @@
 class Contact < ApplicationRecord
   belongs_to :user
 
+  validates :phone, presence: true
+  validates :doc, presence: true
   validate :cpf_must_be_valid
 
   private
