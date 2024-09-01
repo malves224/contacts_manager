@@ -2,7 +2,7 @@ class Contact < ApplicationRecord
   belongs_to :user
 
   validates :phone, presence: true
-  validates :doc, presence: true
+  validates :doc, presence: true, uniqueness: { message: 'Já existe um usuário com esse cpf' }
   validate :cpf_must_be_valid
 
   private
