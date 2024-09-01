@@ -46,6 +46,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'dotenv-rails'
   gem 'shoulda-matchers', '~> 5.0'
+  gem "cpf_cnpj"
 end
 
 group :development do
