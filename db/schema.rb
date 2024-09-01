@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_01_022809) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_01_024813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "postal_code"
+    t.string "country"
+    t.string "latitude"
+    t.string "longitude"
+    t.bigint "contact_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_addresses_on_contact_id"
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "doc"
@@ -31,5 +45,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_022809) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "contacts"
   add_foreign_key "contacts", "users"
 end
