@@ -18,6 +18,9 @@ Contacts Manager é uma aplicação em Ruby on Rails para gerenciamento de conta
 -   **BootstrapVue**: Interface de usuário responsiva e moderna.
 -   **APIs Externas**: Integração com APIs para busca de CEP e geolocalização.
 
+## Front end
+Para front foi utilizado Vue, link para o repositorio: https://github.com/malves224/front_order_manager
+
 ## Instalação e Configuração
 
 1.  **Clone o repositório**:
