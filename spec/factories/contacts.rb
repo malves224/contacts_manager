@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :contact do
-    doc { "12345678901" }
+    doc { "17404081017" }
     phone { "11914474020" }
     association :user
   end

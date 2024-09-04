@@ -14,4 +14,14 @@ class Contact < ApplicationRecord
     clean_cpf = doc.gsub(/[^0-9]/, '')
     errors.add(:doc, 'não é válido') unless CPF.valid?(clean_cpf)
   end
+
+  def self.search(params)
+    query = Contact.all
+    if params[:value].present?
+      value = "%#{params[:value]}%"
+      query = query.where('doc ILIKE ? OR name ILIKE ?', value, value)
+    end
+    query = query.order(created_at: params[:order]) if params[:order].present?
+    query
+  end
 end
