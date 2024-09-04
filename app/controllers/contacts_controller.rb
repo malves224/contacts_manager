@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_action :require_login
   def search
-    render json: Contact.search(search_params)
+    render json: Contact.search(search_params).as_json(include: :address)
   end
 
   def create
