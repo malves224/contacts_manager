@@ -3,6 +3,6 @@ class Address < ApplicationRecord
   validates :street, :city, :state, :postal_code, presence: true
 
   def to_query
-    "#{street}+#{number}+#{city}+#{state}"
+    I18n.transliterate("#{street}+#{number}+#{city}+#{state}".gsub(' ', '+'))
   end
 end
