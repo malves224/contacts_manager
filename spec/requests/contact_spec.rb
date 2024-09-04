@@ -39,13 +39,19 @@ RSpec.describe ContactsController, type: :request do
   end
 
   describe 'POST #create' do
+    before do
+      allow_any_instance_of(GeoLocation).to receive(:search).and_return(["lat" => "-23.5906812", "lon" => "-46.6519979"])
+    end
+
     context 'with valid params' do
       it 'creates a new contact' do
         post '/contacts', params: valid_params, headers: headers
-
+        data = JSON.parse(response.body)
         expect(response).to have_http_status(:created)
         expect(Contact.count).to eq(1)
-        expect(JSON.parse(response.body)['doc']).to eq(valid_params[:contact][:doc])
+        expect(data['doc']).to eq(valid_params[:contact][:doc])
+        expect(data['latitude']).to eq("-23.5906812")
+        expect(data['longitude']).to eq("-46.6519979")
       end
     end
 

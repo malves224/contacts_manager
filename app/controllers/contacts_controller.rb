@@ -5,7 +5,7 @@ class ContactsController < ApplicationController
   end
 
   def create
-    contact = Contact.create(contact_params.merge(user_id: @user.id).as_json)
+    contact = ContactCreationService.new(contact_params, @user).call
     if contact.errors.present?
       render json: { errors: contact.errors.full_messages }, status: :unprocessable_entity
     else
