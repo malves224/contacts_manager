@@ -48,6 +48,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'shoulda-matchers', '~> 5.0'
   gem "cpf_cnpj"
+  gem 'webmock'
 end
 
 group :development do
