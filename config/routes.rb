@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resource :users, only: %i[create] do
     delete :self_destroy
   end
+  get '/cep/search/:cep', to: 'cep#search'
 end
