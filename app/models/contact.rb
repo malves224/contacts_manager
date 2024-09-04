@@ -1,18 +1,17 @@
 class Contact < ApplicationRecord
   belongs_to :user
+  has_one :address
 
   validates :phone, presence: true
   validates :doc, presence: true, uniqueness: { message: 'Já existe um usuário com esse cpf' }
   validate :cpf_must_be_valid
 
-  private
+  accepts_nested_attributes_for :address, allow_destroy: true
 
   def cpf_must_be_valid
     return if doc.blank?
 
     clean_cpf = doc.gsub(/[^0-9]/, '')
-    unless CPF.valid?(clean_cpf)
-      errors.add(:doc, 'não é válido')
-    end
+    errors.add(:doc, 'não é válido') unless CPF.valid?(clean_cpf)
   end
 end
