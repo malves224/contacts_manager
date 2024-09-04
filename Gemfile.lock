@@ -263,6 +263,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   faraday (~> 2.7.10)
+  i18n
   jwt (~> 1.5, >= 1.5.4)
   pg (~> 1.1)
   puma (~> 5.0)
