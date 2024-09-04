@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
   before_action :require_login
-  def index
-    render json: Contact.all
+  def search
+    render json: Contact.search(search_params)
   end
 
   def create
@@ -16,5 +16,9 @@ class ContactsController < ApplicationController
   def contact_params
     params.require(:contact).permit(:doc, :phone, :name,
       address_attributes: [:id, :street, :city, :state, :postal_code, :latitude, :longitude, :complement, :number, :district])
+  end
+
+  def search_params
+    params.permit(:order, :value)
   end
 end

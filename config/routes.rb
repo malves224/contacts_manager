@@ -9,5 +9,7 @@ Rails.application.routes.draw do
     delete :self_destroy
   end
   get '/cep/search/:cep', to: 'cep#search'
-  resource :contacts, only: %i[index create]
+  resource :contacts, only: %i[create] do
+    get :search
+  end
 end

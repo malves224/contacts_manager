@@ -38,11 +38,6 @@ RSpec.describe ContactsController, type: :request do
     }
   end
 
-  before do
-    allow(controller).to receive(:require_login).and_return(true)
-    allow(controller).to receive(:@user).and_return(user)
-  end
-
   describe 'POST #create' do
     context 'with valid params' do
       it 'creates a new contact' do
@@ -67,6 +62,44 @@ RSpec.describe ContactsController, type: :request do
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(json_response['errors']).to include("Doc can't be blank")
+      end
+    end
+  end
+
+  describe "GET #search" do
+    let!(:contact1) { create(:contact, doc: '23162834031', name: 'John Doe', user: user) }
+    let!(:contact2) { create(:contact, doc: '59565336094', name: 'Jane Doe', user: user) }
+    let!(:contact3) { create(:contact, doc: '32146197056', name: 'Alice Smith', user: user) }
+
+    context 'when searching by doc' do
+      it 'returns contacts matching the doc' do
+        get '/contacts/search', params: { value: '23162834031' }, headers: headers
+        json_response = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:ok)
+        expect(json_response.size).to eq(1)
+        expect(json_response.first['id']).to eq(contact1.id)
+      end
+    end
+
+    context 'when searching by name' do
+      it 'returns contacts matching the name' do
+        get '/contacts/search', params: { value: 'John' }, headers: headers
+        json_response = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:ok)
+        expect(json_response.size).to eq(1)
+        expect(json_response.first['id']).to eq(contact1.id)
+      end
+    end
+
+    context 'when searching with an empty value' do
+      it 'returns all contacts' do
+        get '/contacts/search', params: { value: '' }, headers: headers
+        json_response = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:ok)
+        expect(json_response.size).to eq(3)
       end
     end
   end
