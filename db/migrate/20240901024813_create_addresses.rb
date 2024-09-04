@@ -8,6 +8,7 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.string :country
       t.string :latitude
       t.string :longitude
+      t.string :complement
       t.references :contact, null: false, foreign_key: true
 
       t.timestamps

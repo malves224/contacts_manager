@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_01_024813) do
     t.string "country"
     t.string "latitude"
     t.string "longitude"
+    t.string "complement"
     t.bigint "contact_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
