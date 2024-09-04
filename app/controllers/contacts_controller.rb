@@ -13,6 +13,17 @@ class ContactsController < ApplicationController
     end
   end
 
+  def destroy
+    contact = Contact.find(params[:id])
+    if contact.destroy
+      render json: { message: 'Contato deletado com sucesso' }, status: :ok
+    else
+      render status: :not_found
+    end
+  end
+
+  private
+
   def contact_params
     params.require(:contact).permit(:doc, :phone, :name,
       address_attributes: [:id, :street, :city, :state, :postal_code, :latitude, :longitude, :complement, :number, :district])

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   get '/cep/search/:cep', to: 'cep#search'
   resource :contacts, only: %i[create] do
+    delete '/:id', to: 'contacts#destroy'
     get :search
   end
 end

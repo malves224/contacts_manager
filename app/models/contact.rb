@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
   belongs_to :user
-  has_one :address
+  has_one :address, dependent: :destroy
 
   validates :phone, presence: true
   validates :doc, presence: true, uniqueness: { message: 'Já existe um usuário com esse cpf' }

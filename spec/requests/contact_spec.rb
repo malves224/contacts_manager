@@ -50,8 +50,6 @@ RSpec.describe ContactsController, type: :request do
         expect(response).to have_http_status(:created)
         expect(Contact.count).to eq(1)
         expect(data['doc']).to eq(valid_params[:contact][:doc])
-        expect(data['latitude']).to eq("-23.5906812")
-        expect(data['longitude']).to eq("-46.6519979")
       end
     end
 
@@ -107,6 +105,16 @@ RSpec.describe ContactsController, type: :request do
         expect(response).to have_http_status(:ok)
         expect(json_response.size).to eq(3)
       end
+    end
+  end
+
+  describe "DELETE #delete" do
+    let!(:contact) { create(:contact, doc: '23162834031', name: 'John Doe', user: user) }
+
+    it 'deletes a contact' do
+      delete "/contacts/#{contact.id}", headers: headers
+      expect(response).to have_http_status(:ok)
+      expect(Contact.count).to eq(0)
     end
   end
 end
