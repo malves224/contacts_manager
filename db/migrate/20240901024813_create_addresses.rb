@@ -5,10 +5,11 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.string :city
       t.string :state
       t.string :postal_code
-      t.string :country
       t.string :latitude
       t.string :longitude
       t.string :complement
+      t.string :number
+      t.string :district
       t.references :contact, null: false, foreign_key: true
 
       t.timestamps
