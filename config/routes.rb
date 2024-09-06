@@ -9,8 +9,9 @@ Rails.application.routes.draw do
     delete :self_destroy
   end
   get '/cep/search/:cep', to: 'cep#search'
-  resource :contacts, only: %i[create] do
-    delete '/:id', to: 'contacts#destroy'
-    get :search
+  resources :contacts, only: %i[create update show destroy] do
+    collection do
+      get :search
+    end
   end
 end
